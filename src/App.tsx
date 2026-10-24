@@ -203,7 +203,7 @@ export default function App() {
             </div>
 
             <div className="space-y-4 pr-1">
-              {CHRONOLOGICAL_BOOK_PARTS.map((part, pIdx) => {
+              {CHRONOLOGICAL_BOOK_PARTS.map((part: any, pIdx: number) => {
                 return (
                   <div key={pIdx} className="space-y-2">
                     <button
@@ -217,7 +217,7 @@ export default function App() {
                       {part.part}
                     </button>
                     <div className="space-y-1 pl-2 border-l-2 border-[#0A3630]/15">
-                      {part.chapters.map(ch => (
+                      {part.chapters.map((ch: any) => (
                         <button
                           key={ch.id}
                           onClick={() => {
@@ -271,7 +271,7 @@ export default function App() {
                   Connected Philosophers & Cross-References
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {relatedThinkers.map((thinker) => (
+                  {relatedThinkers.map((thinker: any) => (
                     <button
                       key={thinker.id}
                       onClick={() => jumpToPhilosopher(thinker.id)}
@@ -292,7 +292,7 @@ export default function App() {
                     Key Terminology & Etymological Meanings
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {currentChapter.vocabularyGlossary.map((vocab, vIdx) => (
+                    {currentChapter.vocabularyGlossary.map((vocab: any, vIdx: number) => (
                       <div key={vIdx} className="bg-[#F7F4EB] p-3 rounded-xl border border-[#0A3630]/10">
                         <span className="font-serif font-bold text-xs text-[#0A3630]">{vocab.term}: </span>
                         <span className="text-xs text-[#0A3630]/80">{vocab.definition}</span>
@@ -309,7 +309,7 @@ export default function App() {
                   Intellectual Influences & Background
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {(currentChapter.influences || []).map((inf, idx) => (
+                  {(currentChapter.influences || []).map((inf: string, idx: number) => (
                     <span key={idx} className="text-xs bg-[#0A3630]/5 border border-[#0A3630]/15 px-3 py-1.5 rounded-lg text-[#0A3630] font-medium">
                       {inf}
                     </span>
@@ -385,7 +385,7 @@ export default function App() {
 
                   if (cleanedText.includes('### ')) {
                     const rawSections = cleanedText.split(/(?=###\s+)/g);
-                    const parsed = rawSections.map(sec => {
+                    const parsed = rawSections.map((sec: string) => {
                       const match = sec.match(/^###\s+([^\n]+)\n+([\s\S]*)$/);
                       if (match) {
                         return { title: match[1].trim(), content: match[2].trim() };
@@ -395,7 +395,7 @@ export default function App() {
 
                     return (
                       <div className="space-y-4">
-                        {parsed.map((sec, idx) => (
+                        {parsed.map((sec: any, idx: number) => (
                           <div key={idx} className="bg-[#0A3630]/5 p-5 md:p-6 rounded-2xl border border-[#0A3630]/15 space-y-3 shadow-xs">
                             {sec.title && (
                               <div className="flex items-center gap-2.5 border-b border-[#0A3630]/10 pb-2.5">
@@ -408,7 +408,7 @@ export default function App() {
                               </div>
                             )}
                             <div className="space-y-3">
-                              {sec.content.split(/\n\s*\n/).map((p, pIdx) => (
+                              {sec.content.split(/\n\s*\n/).map((p: string, pIdx: number) => (
                                 <p key={pIdx} className="text-xs md:text-sm text-[#0A3630]/85 leading-relaxed font-serif">
                                   {p.trim()}
                                 </p>
@@ -423,7 +423,7 @@ export default function App() {
                   const paragraphs = cleanedText.split(/\n\s*\n/).filter(p => p.trim().length > 0);
                   return (
                     <div className="space-y-3 bg-[#0A3630]/5 p-5 md:p-6 rounded-2xl border border-[#0A3630]/10">
-                      {paragraphs.map((p, pIdx) => (
+                      {paragraphs.map((p: string, pIdx: number) => (
                         <p key={pIdx} className="text-xs md:text-sm text-[#0A3630]/85 leading-relaxed font-serif">
                           {p.trim()}
                         </p>
@@ -439,7 +439,7 @@ export default function App() {
                   <div className="space-y-2 text-xs md:text-sm text-[#0A3630]/85">
                     <p className="font-semibold text-[philosophy-emerald]">Premises:</p>
                     <ul className="list-disc pl-5 space-y-1.5">
-                      {currentChapter.argument.premises.map((p, i) => (
+                      {currentChapter.argument.premises.map((p: string, i: number) => (
                         <li key={i}>{p}</li>
                       ))}
                     </ul>
@@ -489,7 +489,7 @@ export default function App() {
                     Reflection Questions
                   </h4>
                   <ul className="space-y-2.5 text-xs md:text-sm text-[#0A3630]/90">
-                    {currentChapter.reflectionQuestions.map((q, i) => (
+                    {currentChapter.reflectionQuestions.map((q: string, i: number) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <span className="font-bold text-[philosophy-deep-teal/60] shrink-0">{i + 1}.</span>
                         <span>{q}</span>
