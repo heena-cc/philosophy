@@ -51,10 +51,16 @@ const CHRONOLOGICAL_BOOK_PARTS: BookPart[] = [
 // Helper to find all chapters across parts
 const ALL_CHAPTERS: Chapter[] = CHRONOLOGICAL_BOOK_PARTS.flatMap(p => p.chapters);
 
+function getEraDescription(index: number): string {
+  return CHRONOLOGICAL_BOOK_PARTS[index]?.description ?? '';
+}
+
 export default function App() {
   const [selectedPartIndex, setSelectedPartIndex] = useState(0);
   const [selectedChapterId, setSelectedChapterId] = useState('upanishads');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showEraExplanation, setShowEraExplanation] = useState(false);
+const [showEraDetail, setShowEraDetail] = useState<number | null>(0);
 
   const currentPart = CHRONOLOGICAL_BOOK_PARTS[selectedPartIndex];
   const currentChapter = currentPart.chapters.find(c => c.id === selectedChapterId) || currentPart.chapters[0];
@@ -268,7 +274,7 @@ export default function App() {
                   </div>
                 );
               })}
-            </div>
+
           </div>
 
           {/* Chapter Detailed Reader View */}
