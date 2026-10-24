@@ -147,7 +147,7 @@ const [showEraDetail, setShowEraDetail] = useState<number | null>(0);
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <a href="/" className="relative p-3 md:p-3.5 bg-philosophy-emerald rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200" aria-label="Go to home page">
+            <a href="/philosophy/" className="relative p-3 md:p-3.5 bg-philosophy-emerald rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200" aria-label="Go to home page">
               <div className="absolute inset-0 bg-gradient-to-br from-philosophy-emerald to-philosophy-emerald/80 rounded-xl opacity-20" />
               <svg className="w-6 h-6 md:w-7 md:h-7 text-philosophy-ivory" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 {/* Custom philosophy symbol: Phi (φ) within a wisdom circle - the golden ratio of wisdom */}
