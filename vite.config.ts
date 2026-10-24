@@ -4,8 +4,8 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
-  // Base path for GitHub Pages - set via env var or default to root
-  const base = process.env.GITHUB_PAGES ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1]}/` : '/'
+  // Base path for GitHub Pages subpath deployment (heena-c.com/philosophy/)
+  const base = '/philosophy/'
   return {
     plugins: [react(), tailwindcss()],
     resolve: {
