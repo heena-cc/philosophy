@@ -141,7 +141,7 @@ export default function App() {
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div className="relative p-3 md:p-3.5 bg-philosophy-emerald rounded-xl shadow-lg" aria-hidden="true">
+            <a href="/" className="relative p-3 md:p-3.5 bg-philosophy-emerald rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200" aria-label="Go to home page">
               <div className="absolute inset-0 bg-gradient-to-br from-philosophy-emerald to-philosophy-emerald/80 rounded-xl opacity-20" />
               <svg className="w-6 h-6 md:w-7 md:h-7 text-philosophy-ivory" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 {/* Custom philosophy symbol: Phi (φ) within a wisdom circle - the golden ratio of wisdom */}
@@ -160,19 +160,18 @@ export default function App() {
                 <path d="M4.93 19.07l1.41-1.41" stroke="currentColor" strokeWidth="1" opacity="0.3" strokeLinecap="round"/>
                 <path d="M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="1" opacity="0.3" strokeLinecap="round"/>
               </svg>
-            </div>
+            </a>
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-2xl font-bold font-serif tracking-tight text-philosophy-deep-teal leading-tight">
                 The World's Philosophies
               </h1>
               <p className="text-xs md:text-sm text-philosophy-deep-teal/60 mt-0.5 font-sans tracking-wide leading-normal">
-                Authoritative Primary Sources & Scholarly Treatise
+                A Global Journey Through Human Thought
               </p>
             </div>
             <div className="hidden md:block w-px h-10 bg-gradient-to-b from-transparent via-philosophy-emerald/40 to-transparent ml-4 mr-2" aria-hidden="true" />
             <div className="hidden lg:block text-right">
               <p className="text-[10px] text-philosophy-emerald/50 font-sans tracking-widest uppercase">
-                Philosophy
               </p>
             </div>
           </div>
@@ -191,10 +190,15 @@ export default function App() {
             bg-philosophy-ivory/95 backdrop-blur lg:backdrop-blur-none
           `}>
             <div className="flex items-center justify-between border-b border-[#0A3630]/15 pb-3">
-              <h3 className="font-serif font-bold text-[#0A3630] flex items-center gap-2 text-sm">
+              <button 
+                onClick={() => setShowEraExplanation(!showEraExplanation)}
+                className="flex items-center gap-2 font-serif font-bold text-[#0A3630] text-sm hover:text-philosophy-emerald transition-colors focus:outline-none focus:ring-2 focus:ring-philosophy-emerald focus:ring-offset-2 focus:ring-offset-philosophy-ivory"
+                aria-expanded={showEraExplanation}
+              >
                 <BookMarked className="w-4 h-4 text-[philosophy-deep-teal/60]" />
                 Philosophical Eras
-              </h3>
+                <ChevronRight className={`w-4 h-4 transition-transform ${showEraExplanation ? 'rotate-90' : ''}`} />
+              </button>
               {mobileMenuOpen && (
                 <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden text-[#0A3630]">
                   <X className="w-5 h-5" />
@@ -202,12 +206,28 @@ export default function App() {
               )}
             </div>
 
-            <div className="space-y-4 pr-1">
-              {CHRONOLOGICAL_BOOK_PARTS.map((part: any, pIdx: number) => {
+            {showEraExplanation && (
+              <div className="mt-3 p-4 bg-philosophy-emerald/5 border border-philosophy-emerald/20 rounded-xl space-y-3 animate-slide-down">
+                <p className="text-xs text-philosophy-deep-teal/70 font-sans leading-relaxed">
+                  Explore the major philosophical traditions across human history. Each era represents a distinct period of intellectual development, from ancient wisdom traditions to modern critical thought.
+                </p>
+                <div className="space-y-2 text-xs text-philosophy-deep-teal/70">
+                  <p><strong>Philosophical Era I:</strong> Ancient Foundations (c. 800–200 BCE) — The axial age sages: Laozi, Buddha, Confucius, Socrates, and the Upanishads. Foundational questions about reality, ethics, and the good life.</p>
+                  <p><strong>Philosophical Era II:</strong> Classical Systems (c. 150 BCE – 1400 CE) — Systematic philosophies: Nagarjuna, Augustine, Al-Farabi, Aquinas, and the synthesis of faith and reason.</p>
+                  <p><strong>Philosophical Era III:</strong> Early Modern Turn (1500–1850 CE) — The birth of modern philosophy: Machiavelli, Descartes, Spinoza, Hume, Kant, and the critique of tradition.</p>
+                  <p><strong>Philosophical Era IV:</strong> Late Modernity & Critique (1850–Present) — Critique of modernity: Schopenhauer, Nietzsche, James, Wittgenstein, Foucault, and contemporary critical thought.</p>
+                </div>
+              </div>
+            )}
+
+            {CHRONOLOGICAL_BOOK_PARTS.map((part: any, pIdx: number) => {
                 return (
                   <div key={pIdx} className="space-y-2">
                     <button
-                      onClick={() => setSelectedPartIndex(pIdx)}
+                      onClick={() => {
+                        setSelectedPartIndex(pIdx);
+                        setShowEraDetail(pIdx);
+                      }}
                       className={`w-full text-left font-serif font-bold text-xs tracking-wide uppercase px-2 py-1.5 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-philosophy-emerald focus:ring-offset-2 focus:ring-offset-philosophy-ivory ${
                         selectedPartIndex === pIdx 
                           ? 'text-philosophy-deep-teal bg-philosophy-emerald/20 border-l-4 border-philosophy-deep-teal font-bold' 
@@ -216,6 +236,14 @@ export default function App() {
                     >
                       {part.part}
                     </button>
+                    {showEraDetail === pIdx && (
+                      <div className="mt-2 ml-2 p-3 bg-philosophy-emerald/5 border border-philosophy-emerald/20 rounded-xl space-y-2 animate-slide-down">
+                        <p className="text-xs text-philosophy-deep-teal/70 font-sans leading-relaxed">
+                          {getEraDescription(pIdx)}
+                        </p>
+                      </div>
+                    )}
+
                     <div className="space-y-1 pl-2 border-l-2 border-[#0A3630]/15">
                       {part.chapters.map((ch: any) => (
                         <button
@@ -508,7 +536,7 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-[philosophy-deep-teal]/20 py-6 text-center text-xs text-[philosophy-deep-teal/60] bg-[white]">
         <p className="text-[philosophy-deep-teal/60]">
-          Created by Heena Chhatlani, 2026 • The World's Philosophies • Authoritative Primary Sources & Scholarly Treatise
+          Created by Heena Chhatlani, 2026 • The World's Philosophies • A Global Journey Through Human Thought
         </p>
       </footer>
     </div>
