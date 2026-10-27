@@ -1,0 +1,8 @@
+{
+  "name": "The World's Philosophies",
+  "description": "A comprehensive globally representative philosophy treatise with 50 philosophers across 4 eras. Explore primary sources, arguments, and cross-references in an accessible, scholarly format.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

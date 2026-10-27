@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+@theme {
+  --color-philosophy-ivory: #F8F3E7;
+  --color-philosophy-parchment: #F7F4EB;
+  --color-philosophy-card: #FBF9F1;
+  --color-philosophy-deep-teal: #0A3630;
+  --color-philosophy-emerald: #0A876B;
+  --color-philosophy-gold: #C5A059;
+  --color-philosophy-muted-gold: #B88A46;
+  --color-philosophy-pale-teal: #E8F4F2;
+  --color-philosophy-deep-teal-border: #0A3630;
+  --color-philosophy-dark-teal-text: #0A3630;
+
+  --font-serif: Merriweather, Georgia, serif;
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
